@@ -1,0 +1,64 @@
+version: '3.7'
+
+services:
+  main:
+    container_name: main
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+      - 9229:9229
+    command: yarn start:debug
+    env_file:
+      - .env
+    networks:
+      - webnet
+    depends_on:
+      - redis
+      - config_database
+  redis:
+    container_name: redis
+    image: redis:5
+    networks:
+      - webnet
+  config_database:
+    container_name: config_database
+    image: postgres:12
+    networks:
+      - webnet
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USERNAME: ${POSTGRES_USERNAME}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  client_database:
+    container_name: client_database
+    image: postgres:12
+    networks:
+      - webnet
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USERNAME: ${POSTGRES_USERNAME}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - 5433:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  storage:
+    build: ./s3ninja
+    container_name: s3
+    ports:
+        - 9444:9000
+networks:
+  webnet:
+volumes:
+  pgdata:
