@@ -3,8 +3,8 @@ import { AppController } from './app.controller'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AppService } from './app.service'
 import { GraphQLModule } from '@nestjs/graphql'
-import { PokemonModule } from './pokemon/pokemon.module'
 import { configService } from './config/config.service';
+import { AlunosModule } from './alunos/alunos.module'
 @Module({
 	imports: [
 		TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
@@ -12,7 +12,7 @@ import { configService } from './config/config.service';
 			autoSchemaFile: 'src/schema.gql',
 			debug: process.env.NODE_ENV === 'development',
 		  }),
-		PokemonModule
+		AlunosModule
 	],
 	controllers: [ AppController ],
 	providers: [ AppService ]

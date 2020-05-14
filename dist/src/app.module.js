@@ -11,8 +11,8 @@ const app_controller_1 = require("./app.controller");
 const typeorm_1 = require("@nestjs/typeorm");
 const app_service_1 = require("./app.service");
 const graphql_1 = require("@nestjs/graphql");
-const pokemon_module_1 = require("./pokemon/pokemon.module");
 const config_service_1 = require("./config/config.service");
+const alunos_module_1 = require("./alunos/alunos.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -23,7 +23,7 @@ AppModule = __decorate([
                 autoSchemaFile: 'src/schema.gql',
                 debug: process.env.NODE_ENV === 'development',
             }),
-            pokemon_module_1.PokemonModule
+            alunos_module_1.AlunosModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService]

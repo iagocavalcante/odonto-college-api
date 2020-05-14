@@ -22,8 +22,9 @@
     "init-typeorm": "ts-node ./orm-config-init.ts",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "typeorm:migrate": "npm run typeorm migration:generate -- -n",
-    "typeorm:create": "npm run typeorm typeorm migration:create --",
-    "typeorm:run": "npm run typeorm migration:run"
+    "typeorm:create": "npm run typeorm migration:create --",
+    "typeorm:run": "npm run typeorm migration:run",
+    "postinstall": "npm run prestart:prod"
   },
   "dependencies": {
     "@nestjs/common": "^7.0.0",
