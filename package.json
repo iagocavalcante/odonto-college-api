@@ -24,7 +24,7 @@
     "typeorm:migrate": "yarn typeorm migration:generate -- -n",
     "typeorm:create": "yarn typeorm migration:create --",
     "typeorm:run": "yarn typeorm migration:run",
-    "migration:run:prod": "yarn add ts-node && ts-node ./node_modules/typeorm/cli.js migration:run",
+    "migration:run:prod": "ts-node ./node_modules/typeorm/cli.js migration:run",
     "postinstall": "yarn prebuild && yarn init-typeorm && yarn build"
   },
   "dependencies": {
