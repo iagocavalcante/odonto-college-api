@@ -4,11 +4,9 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN yarn install
+RUN yarn
 
 COPY . .
-
-RUN yarn init-typeorm
 
 RUN yarn build
 
@@ -21,7 +19,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN yarn install --prod
+RUN yarn --prod
 
 COPY . .
 

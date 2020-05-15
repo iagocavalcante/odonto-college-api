@@ -23,6 +23,6 @@ export class AlunosService {
 	}
 
 	async getAlunos (): Promise<AlunosEntity[]>  {
-		return await this.repository.aluno.query('select * from tb_alunos')
+		return await this.repository.aluno.find()
 	}
 }
