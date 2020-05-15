@@ -25,7 +25,7 @@
     "typeorm:create": "yarn typeorm migration:create --",
     "typeorm:run": "yarn typeorm migration:run",
     "migration:run:prod": "yarn tsc && yarn ts-node ./node_modules/typeorm/cli.js migration:run",
-    "postinstall": "yarn prebuild && yarn build"
+    "postinstall": "yarn prebuild && yarn init-typeorm && yarn build"
   },
   "dependencies": {
     "@nestjs/common": "^7.0.0",
