@@ -8,6 +8,8 @@ RUN yarn install
 
 COPY . .
 
+RUN yarn init-typeorm
+
 RUN yarn build
 
 FROM node:12.16-alpine as production
@@ -22,6 +24,8 @@ COPY package*.json ./
 RUN yarn install --prod
 
 COPY . .
+
+RUN yarn init-typeorm
 
 COPY --from=development /usr/src/app/dist ./dist
 
