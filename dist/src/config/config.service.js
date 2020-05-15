@@ -39,6 +39,11 @@ class ConfigService {
                 migrationsDir: 'src/database/migrations',
             },
             ssl: this.isProduction(),
+            extra: this.isProduction() ? {
+                ssl: {
+                    rejectUnauthorized: false,
+                },
+            } : '',
         };
     }
 }

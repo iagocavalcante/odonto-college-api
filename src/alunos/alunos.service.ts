@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common'
-import { InjectRepository } from '@nestjs/typeorm'
 import { AlunosEntity } from './alunos.entity'
-import { Repository } from 'typeorm'
 import { CreateAlunosDto } from './dto/create-alunos.dto'
+import RepositoryFactory from 'src/repository-factory'
 
 @Injectable()
 export class AlunosService {
-	constructor (@InjectRepository(AlunosEntity) private readonly AlunosRepository: Repository<AlunosEntity>) {}
+	constructor (private readonly repository: RepositoryFactory) {}
 
 	async createAlunos (data: CreateAlunosDto): Promise<AlunosEntity> {
 		const aluno = new AlunosEntity()
@@ -18,12 +17,12 @@ export class AlunosService {
 		aluno.cro =  data.cro
 		aluno.dataNascimento =  data.dataNascimento
 
-		await this.AlunosRepository.save(aluno)
+		await this.repository.aluno.save(aluno)
 
 		return aluno
 	}
 
-	async getAlunos (): Promise<AlunosEntity[]> {
-		return await this.AlunosRepository.find()
+	async getAlunos (): Promise<AlunosEntity[]>  {
+		return await this.repository.aluno.query('select * from tb_alunos')
 	}
 }
