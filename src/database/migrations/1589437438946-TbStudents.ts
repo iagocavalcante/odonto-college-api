@@ -1,8 +1,8 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class TbAlunos1589437438946 implements MigrationInterface {
-    private tbAlunos = new Table({
-        name: 'tb_alunos',
+export class TbStudents1589437438946 implements MigrationInterface {
+    private tbStudents = new Table({
+        name: 'tb_students',
         columns: [
             {
                 name: 'id',
@@ -22,12 +22,14 @@ export class TbAlunos1589437438946 implements MigrationInterface {
                 type: 'character',
                 length: '255',
                 isNullable: false,
+                isUnique: true
             },
             {
                 name: 'cpf',
                 type: 'character',
                 length: '11',
                 isNullable: true,
+                isUnique: true
             },
             {
                 name: 'cro',
@@ -43,8 +45,9 @@ export class TbAlunos1589437438946 implements MigrationInterface {
             },
             {
                 name: 'matricula',
-                type: 'INTEGER',
+                type: 'character',
                 isNullable: false,
+                isUnique: true
             },
             {
                 name: 'data_nascimento',
@@ -74,11 +77,11 @@ export class TbAlunos1589437438946 implements MigrationInterface {
     });
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.createTable(this.tbAlunos);
+        await queryRunner.createTable(this.tbStudents);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable(this.tbAlunos);
+        await queryRunner.dropTable(this.tbStudents);
     }
 
 }

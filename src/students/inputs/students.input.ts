@@ -1,8 +1,7 @@
-import { Field, ObjectType} from '@nestjs/graphql'
+import { Field, InputType } from '@nestjs/graphql'
 
-@ObjectType()
-export class CreateAlunosDto {
-	@Field() readonly id?: string
+@InputType()
+export class InputStudents {
 	@Field() readonly nome: string
 	@Field() readonly email: string
 	@Field() readonly matricula: number

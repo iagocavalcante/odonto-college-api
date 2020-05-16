@@ -2,14 +2,14 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type CreateAlunosDto {
+type StudentsEntity {
   id: String!
   nome: String!
   email: String!
-  matricula: Float!
   cpf: String!
   rg: String!
   cro: String!
+  matricula: Float!
   dataNascimento: DateTime!
 }
 
@@ -19,14 +19,16 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Query {
-  alunos: [CreateAlunosDto!]!
+  students: [StudentsEntity!]!
+  student(id: String!): StudentsEntity
 }
 
 type Mutation {
-  createAluno(data: InputAlunos!): CreateAlunosDto!
+  saveStudent(id: ID, alunoInput: InputStudents!): StudentsEntity!
+  deleteStudent(id: String!): Boolean!
 }
 
-input InputAlunos {
+input InputStudents {
   nome: String!
   email: String!
   matricula: Float!

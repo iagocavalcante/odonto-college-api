@@ -4,14 +4,15 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { AppService } from './app.service'
 import { GraphQLModule } from '@nestjs/graphql'
 import { configService } from './config/config.service'
-import { AlunosModule } from './alunos/alunos.module'
-import AlunosDataloader from './alunos/alunos.dataloader'
+import { StudentsModule } from './students/students.module'
+import StudentsDataloader from './students/students.dataloader'
 import RepositoryFactoryModule from './repository-factory.module'
+import { ImageUploadModule } from './image-upload/image-upload.module'
 
 const context = {
-	AlunosDataloader: AlunosDataloader()
+	StudentsDataloader: StudentsDataloader()
 }
-const modules = [AlunosModule, RepositoryFactoryModule];
+const modules = [StudentsModule, RepositoryFactoryModule, ImageUploadModule];
 @Module({
 	imports: [
 		...modules,
@@ -22,7 +23,7 @@ const modules = [AlunosModule, RepositoryFactoryModule];
 			installSubscriptionHandlers: true,
 			context
 		  }),
-		AlunosModule
+		StudentsModule
 	],
 	controllers: [ AppController ],
 	providers: [ AppService ]

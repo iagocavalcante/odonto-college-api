@@ -15,13 +15,14 @@ const typeorm_1 = require("@nestjs/typeorm");
 const app_service_1 = require("./app.service");
 const graphql_1 = require("@nestjs/graphql");
 const config_service_1 = require("./config/config.service");
-const alunos_module_1 = require("./alunos/alunos.module");
-const alunos_dataloader_1 = __importDefault(require("./alunos/alunos.dataloader"));
+const students_module_1 = require("./students/students.module");
+const students_dataloader_1 = __importDefault(require("./students/students.dataloader"));
 const repository_factory_module_1 = __importDefault(require("./repository-factory.module"));
+const image_upload_module_1 = require("./image-upload/image-upload.module");
 const context = {
-    AlunosDataloader: alunos_dataloader_1.default()
+    StudentsDataloader: students_dataloader_1.default()
 };
-const modules = [alunos_module_1.AlunosModule, repository_factory_module_1.default];
+const modules = [students_module_1.StudentsModule, repository_factory_module_1.default, image_upload_module_1.ImageUploadModule];
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -35,7 +36,7 @@ AppModule = __decorate([
                 installSubscriptionHandlers: true,
                 context
             }),
-            alunos_module_1.AlunosModule
+            students_module_1.StudentsModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService]
