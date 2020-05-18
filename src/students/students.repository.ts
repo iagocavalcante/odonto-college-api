@@ -1,6 +1,6 @@
 
 import { EntityRepository, Repository } from 'typeorm'
-import { StudentsEntity } from 'src/entities/students.entity'
+import { StudentsEntity } from '../entities/students.entity'
 
 
 @EntityRepository(StudentsEntity)

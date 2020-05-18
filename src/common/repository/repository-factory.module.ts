@@ -1,7 +1,7 @@
 import { Global, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import RepositoryFactory from './repository-factory';
-import { StudentsRepository } from 'src/students/students.repository';
+import { StudentsRepository } from '../../students/students.repository';
 
 @Global()
 @Module({

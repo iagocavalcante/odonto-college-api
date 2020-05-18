@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
-import { StudentsEntity } from 'src/entities/students.entity'
-import RepositoryFactory from 'src/common/repository/repository-factory'
+import { StudentsEntity } from '../entities/students.entity'
+import RepositoryFactory from '../common/repository/repository-factory'
 import { InputStudents } from './inputs/students.input'
-import { RepositoryHelper } from 'src/common/helpers/repository.helper'
+import { RepositoryHelper } from '../common/helpers/repository.helper'
 
 @Injectable()
 export class StudentsService {

@@ -1,5 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql'
-import { IdentificationDocumentTypeEnum } from 'src/entities/identification-document-enum.entity'
+import { IdentificationDocumentTypeEnum } from '../../entities/identification-document-enum.entity'
 
 @InputType()
 export class InputStudents {

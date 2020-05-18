@@ -1,14 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { StudentsService } from './students.service'
-import { StudentsEntity } from 'src/entities/students.entity'
-import { IdentificationDocumentTypeEnum } from 'src/entities/identification-document-enum.entity'
+import { StudentsEntity } from '../entities/students.entity'
+import { IdentificationDocumentTypeEnum } from '../entities/identification-document-enum.entity'
+import { RepositoryHelper } from '../common/helpers/repository.helper'
+import RepositoryFactory from '../common/repository/repository-factory'
+import { StudentsModule } from './students.module'
+import { StudentsRepository } from './students.repository'
 
 describe('StudentsService', () => {
   let service: StudentsService
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [StudentsService, StudentsEntity],
+      providers: [StudentsService, StudentsEntity, StudentsModule, RepositoryHelper, RepositoryFactory, StudentsRepository]
     }).compile()
 
     service = module.get<StudentsService>(StudentsService)

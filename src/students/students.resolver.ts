@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql'
-import { StudentsEntity } from 'src/entities/students.entity'
+import { StudentsEntity } from '../entities/students.entity'
 import { StudentsService } from './students.service'
 import { InputStudents } from './inputs/students.input'
 import { UpsertStudentDto } from './dto/students-upsert.dto'
