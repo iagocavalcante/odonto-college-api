@@ -1,7 +1,7 @@
 import DataLoader from 'dataloader';
 import { getRepository } from 'typeorm';
 
-import { StudentsEntity } from './students.entity';
+import { StudentsEntity } from '../entities/students.entity';
 
 const batchStudents = async (StudentsIds: number[]) => {
   const Students = await getRepository(StudentsEntity).findByIds(StudentsIds);

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
-import { StudentsEntity } from './students.entity'
-import RepositoryFactory from 'src/repository-factory'
+import { StudentsEntity } from 'src/entities/students.entity'
+import RepositoryFactory from 'src/common/repository/repository-factory'
 import { InputStudents } from './inputs/students.input'
 import { RepositoryHelper } from 'src/common/helpers/repository.helper'
 
@@ -11,54 +11,39 @@ export class StudentsService {
 		private readonly repositoryHelper: RepositoryHelper
 	) {}
 
-	async upsertAluno(id: string | undefined, aluno: InputStudents): Promise<StudentsEntity> {
-		const { email }: { email: string } = aluno;
-		const hasAluno: StudentsEntity = await this.repository.aluno.findOne({
+	async upsertStudent(id: string | undefined, student: InputStudents): Promise<StudentsEntity> {
+		const { email }: { email: string } = student;
+		const hasStudent: StudentsEntity = await this.repository.student.findOne({
 		  where: {
 			email
 		  },
 		});
 	
-		if (hasAluno) {
+		if (hasStudent) {
 		  throw new Error(`E-mail ${email} já está em uso.`);
 		}
 	
-		const novoAluno: StudentsEntity = await this.repositoryHelper.getUpsertData(id, aluno, this.repository.aluno);
+		const newStudent: StudentsEntity = await this.repositoryHelper.getUpsertData(id, student, this.repository.student);
 	
-		return this.repository.aluno.save({ ...novoAluno, active: true });
-	  }
-
-	async createStudents (id: string | undefined, data: InputStudents): Promise<StudentsEntity> {
-		const aluno = new StudentsEntity()
-		aluno.nome =  data.nome
-		aluno.email =  data.email
-		aluno.matricula =  data.matricula
-		aluno.cpf =  data?.cpf
-		aluno.rg =  data?.rg
-		aluno.cro =  data.cro
-		aluno.dataNascimento =  data?.dataNascimento
-
-		await this.repository.aluno.save(aluno)
-
-		return aluno
+		return this.repository.student.save({ ...newStudent, active: true });
 	}
 
 	async getStudents (): Promise<StudentsEntity[]>  {
-		return await this.repository.aluno.find()
+		return await this.repository.student.find()
 	}
 	
-	async getAluno (id: string): Promise<StudentsEntity>  {
-		return await this.repository.aluno.findOne(id)
+	async getStudent (id: string): Promise<StudentsEntity>  {
+		return await this.repository.student.findOne(id)
 	}
 
-	async update(id: number, aluno: StudentsEntity): Promise<StudentsEntity> {
-		const toUpdate = await this.repository.aluno.findOne(id);
+	async update(id: number, student: StudentsEntity): Promise<StudentsEntity> {
+		const toUpdate = await this.repository.student.findOne(id);
 	
-		const updated = Object.assign(toUpdate, aluno);
-		return await this.repository.aluno.save(updated);
+		const updated = Object.assign(toUpdate, student);
+		return await this.repository.student.save(updated);
 	  }
 	
 	  async delete(email: string): Promise<boolean> {
-		return Boolean(this.repository.aluno.softDelete({ email }))
+		return Boolean(this.repository.student.softDelete({ email }))
 	  }
 }

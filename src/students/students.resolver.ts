@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql'
-import { StudentsEntity } from './students.entity'
+import { StudentsEntity } from 'src/entities/students.entity'
 import { StudentsService } from './students.service'
 import { InputStudents } from './inputs/students.input'
 import { UpsertStudentDto } from './dto/students-upsert.dto'
@@ -15,13 +15,13 @@ export class StudentsResolver {
 
 	@Query(() => StudentsEntity, { nullable: true })
 	public async student(@Args('id') id: string): Promise<StudentsEntity> {
-		return this.studentsService.getAluno(id)
+		return this.studentsService.getStudent(id)
 	}
 
 	@Mutation(() => StudentsEntity)
 	async saveStudent(@Args() mutationArgs: UpsertStudentDto): Promise<StudentsEntity> {
-		const { id, alunoInput }: { id?: string; alunoInput: InputStudents } = mutationArgs;
-		return this.studentsService.upsertAluno(id, alunoInput);
+		const { id, studentInput }: { id?: string; studentInput: InputStudents } = mutationArgs;
+		return this.studentsService.upsertStudent(id, studentInput);
 	}
 
 	@Mutation(() => Boolean)

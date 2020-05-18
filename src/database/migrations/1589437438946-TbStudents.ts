@@ -12,7 +12,7 @@ export class TbStudents1589437438946 implements MigrationInterface {
                 generationStrategy: 'uuid',
             },
             {
-                name: 'nome',
+                name: 'full_name',
                 type: 'character',
                 length: '255',
                 isNullable: false,
@@ -25,32 +25,38 @@ export class TbStudents1589437438946 implements MigrationInterface {
                 isUnique: true
             },
             {
-                name: 'cpf',
+                name: 'identification_document',
                 type: 'character',
-                length: '11',
+                length: '20',
                 isNullable: true,
                 isUnique: true
+            },
+            {
+                name: 'identification_document_type',
+                type: 'enum',
+                enumName: 'identification_document_type',
+                enum: ['cpf', 'rg', 'cnh']
             },
             {
                 name: 'cro',
                 type: 'character',
                 length: '8',
-                isNullable: false,
-            },
-            {
-                name: 'rg',
-                type: 'character',
-                length: '10',
                 isNullable: true,
             },
             {
-                name: 'matricula',
+                name: 'is_specialization',
+                type: 'boolean',
+                isNullable: true,
+            },
+            {
+                name: 'enrollment_number',
                 type: 'character',
+                length: '15',
                 isNullable: false,
                 isUnique: true
             },
             {
-                name: 'data_nascimento',
+                name: 'birth_date',
                 type: 'DATE',
                 isNullable: true,
             },

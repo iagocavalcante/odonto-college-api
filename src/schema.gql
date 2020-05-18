@@ -4,19 +4,18 @@
 
 type StudentsEntity {
   id: String!
-  nome: String!
+  fullName: String!
   email: String!
-  cpf: String!
-  rg: String!
-  cro: String!
-  matricula: Float!
-  dataNascimento: DateTime!
+  identificationDocumentType: String
+  identificationDocument: String
+  cro: String
+  enrollmentNumber: Float!
+  isSpecialization: Boolean
+  birthDate: Date
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
+"""Date custom scalar type"""
+scalar Date
 
 type Query {
   students: [StudentsEntity!]!
@@ -24,16 +23,17 @@ type Query {
 }
 
 type Mutation {
-  saveStudent(id: ID, alunoInput: InputStudents!): StudentsEntity!
+  saveStudent(id: ID, studentInput: InputStudents!): StudentsEntity!
   deleteStudent(id: String!): Boolean!
 }
 
 input InputStudents {
-  nome: String!
+  fullName: String!
   email: String!
-  matricula: Float!
-  cpf: String!
-  rg: String!
-  cro: String!
-  dataNascimento: DateTime!
+  enrollmentNumber: Float!
+  identificationDocumentType: String
+  identificationDocument: String
+  isSpecialization: Boolean
+  cro: String
+  birthDate: Date
 }

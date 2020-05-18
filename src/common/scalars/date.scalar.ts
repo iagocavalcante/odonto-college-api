@@ -1,25 +1,28 @@
-import { Validator } from 'class-validator'
 import { CustomScalar, Scalar } from '@nestjs/graphql'
-import { Kind } from 'graphql'
+import { Kind, ValueNode } from 'graphql'
 
 @Scalar('Date', type => Date)
-export class DateScalar implements CustomScalar<number | string, Date> {
-  description = 'Date custom scalar type'
+export class DateScalar implements CustomScalar<string, Date> {
+  description = 'Date custom scalar type';
 
-  private validator = new Validator()
-
-  parseValue(value: number | string): Date {
-    return new Date(value)
+  parseValue(value: Date): Date {
+    return new Date(value); // value from the client
   }
 
-  serialize(value: Date): number {
-    return value.getTime()
-  }
-
-  parseLiteral(ast: any): Date | null {
-    if ((ast.kind === Kind.INT || ast.kind === Kind.STRING)) {
-      return new Date(ast.value)
+  serialize(value: Date): string {
+    const formatedDate = new Date(value)
+    const options = {
+      year: "numeric",
+      month: "2-digit",
+      day: "numeric"
     }
-    throw new Error('Date cannot represent an invalid ISO-8601 Date string')
+    return formatedDate.toLocaleDateString('pt-Br', options); // value sent to the client
+  }
+
+  parseLiteral(ast: ValueNode): Date {
+    if (ast.kind === Kind.INT) {
+      return new Date(ast.value);
+    }
+    return null;
   }
 }

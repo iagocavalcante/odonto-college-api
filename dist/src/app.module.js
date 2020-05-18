@@ -17,7 +17,7 @@ const graphql_1 = require("@nestjs/graphql");
 const config_service_1 = require("./config/config.service");
 const students_module_1 = require("./students/students.module");
 const students_dataloader_1 = __importDefault(require("./students/students.dataloader"));
-const repository_factory_module_1 = __importDefault(require("./repository-factory.module"));
+const repository_factory_module_1 = __importDefault(require("./common/repository/repository-factory.module"));
 const image_upload_module_1 = require("./image-upload/image-upload.module");
 const context = {
     StudentsDataloader: students_dataloader_1.default()

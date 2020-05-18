@@ -6,7 +6,7 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { configService } from './config/config.service'
 import { StudentsModule } from './students/students.module'
 import StudentsDataloader from './students/students.dataloader'
-import RepositoryFactoryModule from './repository-factory.module'
+import RepositoryFactoryModule from './common/repository/repository-factory.module'
 import { ImageUploadModule } from './image-upload/image-upload.module'
 
 const context = {

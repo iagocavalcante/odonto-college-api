@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { StudentsService } from './students.service'
-import { StudentsEntity } from './students.entity'
+import { StudentsEntity } from 'src/entities/students.entity'
+import { IdentificationDocumentTypeEnum } from 'src/entities/identification-document-enum.entity'
 
 describe('StudentsService', () => {
   let service: StudentsService
@@ -17,25 +18,24 @@ describe('StudentsService', () => {
     expect(service).toBeDefined()
   })
 
-  it('should return one new User', async () => {
-    const mockAlunoEntity: StudentsEntity = {
-      nome: 'John Doe',
+  it('should return one new Student', async () => {
+    const mockStudentEntity: StudentsEntity = {
+      fullName: 'John Doe',
       email: 'johndoe@johndoe.com',
-      matricula: 1030038,
-      cpf: '00000000000',
-      rg: '2030300',
-      cro: '12312332',
-      dataNascimento: new Date('1992-20-12'),
+      enrollmentNumber: 1030038,
+      identificationDocument: '00000000000',
+      identificationDocumentType: IdentificationDocumentTypeEnum.cpf,
+      birthDate: new Date('1992-20-12'),
     }
 
-    const novoAluno: StudentsEntity = {
+    const newStudent: StudentsEntity = {
       id: 'e70dee79-0ecd-4991-9afe-bc5c298a2c1e',
       createdAt: new Date(),
-      ...mockAlunoEntity,
+      ...mockStudentEntity,
     }
 
-    jest.spyOn(service, 'upsertAluno').mockImplementation(() => Promise.resolve(novoAluno))
+    jest.spyOn(service, 'upsertStudent').mockImplementation(() => Promise.resolve(newStudent))
 
-    expect(await service.upsertAluno(undefined, mockAlunoEntity)).toBe(novoAluno)
+    expect(await service.upsertStudent(undefined, mockStudentEntity)).toBe(newStudent)
   })
 })
