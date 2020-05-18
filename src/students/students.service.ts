@@ -35,15 +35,8 @@ export class StudentsService {
 	async getStudent (id: string): Promise<StudentsEntity>  {
 		return await this.repository.student.findOne(id)
 	}
-
-	async update(id: number, student: StudentsEntity): Promise<StudentsEntity> {
-		const toUpdate = await this.repository.student.findOne(id);
 	
-		const updated = Object.assign(toUpdate, student);
-		return await this.repository.student.save(updated);
-	  }
-	
-	  async delete(email: string): Promise<boolean> {
+	async delete(email: string): Promise<boolean> {
 		return Boolean(this.repository.student.softDelete({ email }))
-	  }
+	}
 }

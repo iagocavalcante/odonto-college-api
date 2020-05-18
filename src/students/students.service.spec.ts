@@ -42,4 +42,61 @@ describe('StudentsService', () => {
 
     expect(await service.upsertStudent(undefined, mockStudentEntity)).toBe(newStudent)
   })
+  
+  it('should return one Student', async () => {
+    const mockStudentEntity: StudentsEntity = {
+      fullName: 'John Doe',
+      email: 'johndoe@johndoe.com',
+      enrollmentNumber: 1030038,
+      identificationDocument: '00000000000',
+      identificationDocumentType: IdentificationDocumentTypeEnum.cpf,
+      birthDate: new Date('1992-20-12'),
+    }
+
+    const student: StudentsEntity = {
+      id: 'e70dee79-0ecd-4991-9afe-bc5c298a2c1e',
+      createdAt: new Date(),
+      ...mockStudentEntity,
+    }
+
+    jest.spyOn(service, 'getStudent').mockImplementation(() => Promise.resolve(student))
+
+    expect(await service.getStudent('e70dee79-0ecd-4991-9afe-bc5c298a2c1e')).toBe(student)
+  })
+  
+  it('should return array of Students', async () => {
+    const mockStudentEntity: StudentsEntity = {
+      fullName: 'John Doe',
+      email: 'johndoe@johndoe.com',
+      enrollmentNumber: 1030038,
+      identificationDocument: '00000000000',
+      identificationDocumentType: IdentificationDocumentTypeEnum.cpf,
+      birthDate: new Date('1992-20-12'),
+    }
+
+    const students: StudentsEntity[] = [
+      {
+        id: 'e70dee79-0ecd-4991-9afe-bc5c298a2c1e',
+        createdAt: new Date(),
+        ...mockStudentEntity,
+      },
+      {
+        id: 'e70dee79-0ecd-4991-9afe-bc5c298a2cae',
+        createdAt: new Date(),
+        ...mockStudentEntity,
+      },
+    ]
+
+    jest.spyOn(service, 'getStudents').mockImplementation(() => Promise.resolve(students))
+
+    expect(await service.getStudents()).toBe(students)
+  })
+  
+  it('should return true when delete a Student', async () => {
+    const email = 'johndoe@johndoe.com'
+
+    jest.spyOn(service, 'delete').mockImplementation(() => Promise.resolve(true))
+
+    expect(await service.delete(email)).toBe(true)
+  })
 })
