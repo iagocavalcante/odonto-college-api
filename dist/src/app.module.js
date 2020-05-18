@@ -35,8 +35,7 @@ AppModule = __decorate([
                 debug: process.env.NODE_ENV === 'development',
                 installSubscriptionHandlers: true,
                 context
-            }),
-            students_module_1.StudentsModule
+            })
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService]

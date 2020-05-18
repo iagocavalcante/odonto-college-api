@@ -22,8 +22,7 @@ const modules = [StudentsModule, RepositoryFactoryModule, ImageUploadModule];
 			debug: process.env.NODE_ENV === 'development',
 			installSubscriptionHandlers: true,
 			context
-		  }),
-		StudentsModule
+		})
 	],
 	controllers: [ AppController ],
 	providers: [ AppService ]

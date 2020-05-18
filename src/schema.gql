@@ -24,7 +24,7 @@ type Query {
 
 type Mutation {
   saveStudent(id: ID, studentInput: InputStudents!): StudentsEntity!
-  deleteStudent(id: String!): Boolean!
+  deleteStudent(email: String!): Boolean!
 }
 
 input InputStudents {

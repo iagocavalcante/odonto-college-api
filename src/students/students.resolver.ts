@@ -3,6 +3,7 @@ import { StudentsEntity } from '../entities/students.entity'
 import { StudentsService } from './students.service'
 import { InputStudents } from './inputs/students.input'
 import { UpsertStudentDto } from './dto/students-upsert.dto'
+import { UpdateResult } from 'typeorm'
 
 @Resolver(() => StudentsEntity)
 export class StudentsResolver {
@@ -25,7 +26,7 @@ export class StudentsResolver {
 	}
 
 	@Mutation(() => Boolean)
-	deleteStudent(@Args('id') id: string): Promise<boolean> {
-		return this.studentsService.delete(id);
+	deleteStudent(@Args('email') email: string): Promise<UpdateResult> {
+		return this.studentsService.delete(email);
 	}
 }
